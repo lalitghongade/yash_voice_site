@@ -138,6 +138,8 @@
 		function setResponse(val) {
 			$("#response").text(val);
 			
+			console.log("first line of setResponse executed");
+			
 			
 			  if (val.result) {
                 var say= respText; 
@@ -147,7 +149,8 @@
                 var utterThis = new SpeechSynthesisUtterance(say);
                 utterThis.lang = "en-US";
                 synth.speak(utterThis);
-		console.log("Audio: " + utterThis);		  
+		console.log("Audio: " + utterThis);	
+				  console.log("other part of setResponse executed");
 	  
             }
 		
