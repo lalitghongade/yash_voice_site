@@ -85,8 +85,7 @@ function send() {
         });
     }
     function setResponse(val) {
-	    //Edit "AI: " to change name
-        conversation.push("AI: " + val + '\r\n');
+        conversation.push("Yash: " + val + '\r\n');
         $("#response").text(conversation.join(""));
     }
     var conversation = [];
