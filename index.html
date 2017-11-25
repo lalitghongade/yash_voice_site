@@ -1,108 +1,106 @@
 <html>
 <head>
 	<title>API Example</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
-	<script type="text/javascript">
-		var accessToken = "641c12f7e65448f1b47447d3aec7f9b9";
-		var baseUrl = "https://api.api.ai/v1/";
-		$(document).ready(function() {
-			$("#input").keypress(function(event) {
-				if (event.which == 13) {
-					event.preventDefault();
-					send();
-				}
-			});
-			$("#rec").click(function(event) {
-				switchRecognition();
-			});
-		});
-		var recognition;
-		function startRecognition() {
-			recognition = new webkitSpeechRecognition();
-			recognition.onstart = function(event) {
-				updateRec();
-			};
-			recognition.onresult = function(event) {
-				var text = "";
-			    for (var i = event.resultIndex; i < event.results.length; ++i) {
-			    	text += event.results[i][0].transcript;
-			    }
-			    setInput(text);
-				stopRecognition();
-			};
-			recognition.onend = function() {
-				stopRecognition();
-			};
-			recognition.lang = "en-US";
-			recognition.start();
-		}
-	
-		function stopRecognition() {
-			if (recognition) {
-				recognition.stop();
-				recognition = null;
-			}
-			updateRec();
-		}
-		function switchRecognition() {
-			if (recognition) {
-				stopRecognition();
-			} else {
-				startRecognition();
-			}
-		}
-		function setInput(text) {
-			$("#input").val(text);
-			send();
-		}
-		function updateRec() {
-			$("#rec").text(recognition ? "Stop" : "Speak");
-		}
-		function send() {
-			var text = $("#input").val();
-			$.ajax({
-				type: "POST",
-				url: baseUrl + "query?v=20150910",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				headers: {
-					"Authorization": "Bearer " + accessToken
-				},
-				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
-				success: function(data) {
-					setResponse(JSON.stringify(data, undefined, 2));
-				},
-				error: function() {
-					setResponse("Internal Server Error");
-				}
-			});
-			var respText = data.result.fulfillment.speech;
-console.log("Respuesta: " + respText);
-setResponse(respText);
-responsiveVoice.speak(respText);
-			setResponse("Loading...");
-		}
-		function setResponse(val) {
-			$("#response").text(val);
-			conversation.push("AI: " + val + '\r\n');
-//$("#response").text(val);
-$("#response").text(conversation.join(""));
-		}
-	</script>
-	<style type="text/css">
-		body { width: 500px; margin: 0 auto; text-align: center; margin-top: 20px; }
-		div {  position: absolute; }
-		input { width: 400px; }
-		button { width: 50px; }
-		textarea { width: 100%; }
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var accessToken ="youraccesstokenhere";
+    var baseUrl = "https://api.dialogflow.com/v1/";
+    $(document).ready(function() {
+        $("#input").keypress(function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                send();
+this.value = ''; //add this line to auto clear your text field so that you won't have to press backspace to clear the text field
+            }
+        });
+        $("#rec").click(function(event) {
+            switchRecognition();
+        });
+    });
+    var recognition;
+    function startRecognition() {
+        recognition = new webkitSpeechRecognition();
+        recognition.onstart = function(event) {
+            updateRec();
+        };
+        recognition.onresult = function(event) {
+            var text = "";
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                text += event.results[i][0].transcript;
+            }
+            setInput(text);
+            stopRecognition();
+        };
+        recognition.onend = function() {
+            stopRecognition();
+        };
+        recognition.lang = "en-US";
+        recognition.start();
+    }
+    function stopRecognition() {
+        if (recognition) {
+            recognition.stop();
+            recognition = null;
+        }
+        updateRec();
+    }
+    function switchRecognition() {
+        if (recognition) {
+            stopRecognition();
+        } else {
+            startRecognition();
+        }
+    }
+    function setInput(text) {
+        $("#input").val(text);
+        send();
+    }
+    function updateRec() {
+        $("#rec").text(recognition ? "Stop" : "Speak");
+    }
+function send() {
+        var text = $("#input").val();
+    conversation.push("Me: " + text + '\r\n');
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "query?v=20150910",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                "Authorization": "Bearer " + accessToken
+            },
+            data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+            success: function(data) {
+                var respText = data.result.fulfillment.speech;
+                console.log("Respuesta: " + respText);
+                setResponse(respText);
+            },
+            error: function() {
+                setResponse("Internal Server Error");
+            }
+        });
+    }
+    function setResponse(val) {
+	    //Edit "AI: " to change name
+        conversation.push("AI: " + val + '\r\n');
+        $("#response").text(conversation.join(""));
+    }
+    var conversation = [];
+</script>
+  <style type="text/css">
+		bot.body { width: 500px; margin: 0 auto; margin-top: 20px; }
+		bot.div {  position: absolute; }
+		bot.input { width: 400px; }
+		bot.button { width: 50px; }
+		bot.textarea { width: 100%; }
 	</style>
 </head>
 <body>
-	<div>
-		<input id="input" type="text"> <button id="rec">Speak</button>
-		<br>Responses<br> <textarea id="response" cols="40" rows="20"></textarea>
+	<div class="bot">
+  <textarea readOnly = true; id="response" cols="40" rows="20" style="resize: none;"></textarea>
+  <br />
+    <input id="input" type="text" placeholder="Type here..." autocomplete="off" /><button id="rec">Speak</button>
 	</div>
 </body>
 </html>
