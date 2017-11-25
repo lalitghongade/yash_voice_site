@@ -87,6 +87,15 @@ function send() {
     function setResponse(val) {
         conversation.push("Yash: " + val + '\r\n');
         $("#response").text(conversation.join(""));
+	     if (val.result) {
+                var say=""; 
+                say = val.result.fulfillment.speech;
+                
+                synth = window.speechSynthesis;
+                var utterThis = new SpeechSynthesisUtterance(say);
+                //utterThis.lang = "en-US";
+                synth.speak(utterThis);
+            }
     }
     var conversation = [];
 </script>
