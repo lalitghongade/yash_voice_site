@@ -140,12 +140,12 @@
 			
 			
 			  if (val.result) {
-                var say=""; 
+                var say="test"; 
                 say = val.result.fulfillment.speech;
                 
                 synth = window.speechSynthesis;
                 var utterThis = new SpeechSynthesisUtterance(say);
-                //utterThis.lang = "en-US";
+                utterThis.lang = "en-US";
                 synth.speak(respText);
 		console.log("Audio: " + respText);		  
 	  
