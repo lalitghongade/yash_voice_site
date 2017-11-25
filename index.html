@@ -122,14 +122,14 @@
 					var respText = data.result.fulfillment.speech;
 					console.log("Response: " + respText);
 					setResponse(respText);
+					responsiveVoice.speak(respText);
 				},
 				error: function() {
 					setResponse("Internal Server Error");
 				}
 			});
 			setResponse("Thinking...");
-			setResponse(respText);
-responsiveVoice.speak(respText);
+			
 			
 			
 		}
@@ -142,6 +142,8 @@ responsiveVoice.speak(respText);
 
 		function setResponse(val) {
 			$("#response").text(val);
+			
+			
 			
 		
 			
