@@ -119,7 +119,7 @@
 				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
 				success: function(data) {
 					var respText = data.result.fulfillment.speech;
-					console.log("Respuesta: " + respText);
+					console.log("Response: " + respText);
 					setResponse(respText);
 				},
 				error: function() {
@@ -137,7 +137,7 @@
 
 		function setResponse(val) {
 			$("#response").text(val);
-			console.log(val);
+		
 		}
 
 	</script>
