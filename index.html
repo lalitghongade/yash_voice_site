@@ -123,8 +123,7 @@
 					console.log("Response: " + respText);
 					setResponse(respText);
 					responsiveVoice.speak(respText);
-					var audio = new Audio('audio1.mp3');
-                                        audio.play();
+					
 				},
 				error: function() {
 					setResponse("Internal Server Error");
@@ -142,9 +141,13 @@
 			
             }
 		
-		// var audio = new Audio('audio1.mp3');
-                //audio.play();
-
+		
+		
+		function audioTest(){
+		
+	        var audio = new Audio('audio1.mp3');
+                audio.play();
+		}
 	</script>
 	<style type="text/css">
 		body { width: 500px; margin: 0 auto; text-align: center; margin-top: 20px; }
@@ -157,6 +160,7 @@
 <body>
 	<div>
 		<input id="input" type="text"> <button id="rec">Speak</button>
+		<input type="button" value="Test" onclick="audioTest();">
 		<br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>
 	</div>
 </body>
