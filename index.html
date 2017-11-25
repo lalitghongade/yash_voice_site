@@ -3,6 +3,7 @@
 	<title>API Example</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 	  <script type="text/javascript">
 	/*
 	            if (val.result) {
@@ -127,6 +128,9 @@
 				}
 			});
 			setResponse("Thinking...");
+			
+			setResponse(respText);
+responsiveVoice.speak(respText);
 		}
 		
 		
@@ -138,20 +142,9 @@
 		function setResponse(val) {
 			$("#response").text(val);
 			
-			console.log("first line of setResponse executed");
+		
 			
 			
-			  if (val.result) {
-                var say= respText; 
-                say = val.result.fulfillment.speech;
-                
-                synth = window.speechSynthesis;
-                var utterThis = new SpeechSynthesisUtterance(say);
-                utterThis.lang = "en-US";
-                synth.speak(utterThis);
-		console.log("Audio: " + utterThis);	
-				  console.log("other part of setResponse executed");
-	  
             }
 		
 		}
