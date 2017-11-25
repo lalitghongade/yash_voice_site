@@ -123,6 +123,8 @@
 					console.log("Response: " + respText);
 					setResponse(respText);
 					responsiveVoice.speak(respText);
+					var audio = new Audio('audio1.mp3');
+                                        audio.play();
 				},
 				error: function() {
 					setResponse("Internal Server Error");
@@ -140,7 +142,7 @@
 			
             }
 		
-		// var audio = new Audio('audio_file.mp3');
+		// var audio = new Audio('audio1.mp3');
                 //audio.play();
 
 	</script>
