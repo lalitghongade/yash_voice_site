@@ -78,10 +78,17 @@
 					setResponse("Internal Server Error");
 				}
 			});
+			var respText = data.result.fulfillment.speech;
+console.log("Respuesta: " + respText);
+setResponse(respText);
+responsiveVoice.speak(respText);
 			setResponse("Loading...");
 		}
 		function setResponse(val) {
 			$("#response").text(val);
+			conversation.push("AI: " + val + '\r\n');
+//$("#response").text(val);
+$("#response").text(conversation.join(""));
 		}
 	</script>
 	<style type="text/css">
