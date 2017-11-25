@@ -4,6 +4,18 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	
+	            if (val.result) {
+                var say=""; 
+                say = val.result.fulfillment.speech;
+                
+                synth = window.speechSynthesis;
+                var utterThis = new SpeechSynthesisUtterance(say);
+                //utterThis.lang = "en-US";
+                synth.speak(utterThis);
+            }
+	</script>
+	<script type="text/javascript">
 
 	        var accessToken ="641c12f7e65448f1b47447d3aec7f9b9";
 		var baseUrl = "https://api.api.ai/v1/";
