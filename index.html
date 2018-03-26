@@ -133,7 +133,8 @@
 				},
 				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
 				success: function(data) {
-					var respText = data.result.fulfillment.speech;
+					//var respText = data.result.fulfillment.speech;
+					var respText = JSON.stringfy(data, undefined,2));
 					console.log("Response: " + respText);
 					setResponse(respText);
 					responsiveVoice.speak(respText);
